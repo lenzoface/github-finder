@@ -3,8 +3,6 @@ import githubReducer from "./GithubReducer";
 
 const GithubContext = createContext()
 
-const GITHUB_URL = process.env.REACT_APP_GITHUB_URL
-const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN
 
 export const GithubProvider = ({ children }) => {
     // const [users, setUsers] = useState([])
@@ -17,30 +15,6 @@ export const GithubProvider = ({ children }) => {
     }
 
     const [state, dispatch] = useReducer(githubReducer, initialState)
-
-    // Get results for users search
-    const searchUsers = async (text) => {
-        setLoading()
-
-        const params = new URLSearchParams({
-            q: text
-        })
-
-        const response = await fetch(`${GITHUB_URL}/search/users?${params}`, {
-            headers: {
-                Authorization: `token ${GITHUB_TOKEN}`
-            }
-        })
-
-        const {items} = await response.json()
-
-        dispatch({
-            type: 'GET_USERS',
-            payload: items,
-        })
-        // setUsers(data);
-        // setLoading(false);
-    }
 
 
     // Get a single user
@@ -101,7 +75,7 @@ const setLoading = () => dispatch({type: 'SET_LOADING'})
         // user: state.user,
         // repos: state.repos,
         ...state,
-        searchUsers,
+        dispatch,
         clearUsers,
         getUser,
         getUserRepos,

@@ -1,6 +1,6 @@
 # GitHub Finder App
 
-My second React App ⚛️, will use GITHUB API to make an app.
+My second React App ⚛️, using GITHUB API to make an app.
 
 ## Find Users!
 
